@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dameesha — Electronics Engineering</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFDF9;
+    --sand: #E8DFD0;
+    --terracotta: #C2714F;
+    --terracotta-light: #E8A98A;
+    --terracotta-pale: #F5E8E0;
+    --brown: #4A3728;
+    --brown-mid: #7A5C48;
+    --text: #2E1F14;
+    --text-muted: #7A6558;
+    --green-sage: #7A8C6E;
+    --green-pale: #E8EDE4;
+    --accent-gold: #C8A96E;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(250, 247, 242, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--sand);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--terracotta);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--terracotta); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #F0DDD3 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-text { position: relative; z-index: 1; }
+
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--terracotta);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 1.1;
+    color: var(--brown);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    padding: 0.85rem 2rem;
+    background: var(--terracotta);
+    color: #fff;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--brown-mid); transform: translateY(-2px); }
+
+  .btn-outline {
+    padding: 0.85rem 2rem;
+    border: 1.5px solid var(--sand);
+    color: var(--text-muted);
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--terracotta); color: var(--terracotta); transform: translateY(-2px); }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .avatar-frame {
+    width: 340px; height: 420px;
+    border-radius: 200px 200px 120px 120px;
+    background: var(--sand);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .avatar-initials {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 6rem;
+    color: var(--terracotta-light);
+    letter-spacing: -0.05em;
+    user-select: none;
+  }
+
+  .floating-badge {
+    position: absolute;
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--brown);
+    box-shadow: 0 4px 20px rgba(74, 55, 40, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .badge-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green-sage);
+    flex-shrink: 0;
+  }
+
+  .badge-1 { bottom: 40px; left: -30px; }
+  .badge-2 { top: 60px; right: -20px; }
+  .badge-3 { bottom: 120px; right: -40px; }
+
+  /* ABOUT */
+  section { padding: 6rem 4rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.8rem;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--brown);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: var(--text-muted);
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+    font-size: 1.02rem;
+  }
+
+  .about-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .about-card {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .about-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(74, 55, 40, 0.1);
+  }
+
+  .about-card-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .about-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--brown);
+    margin-bottom: 0.3rem;
+  }
+
+  .about-card p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  /* SKILLS */
+  .skills-section {
+    background: var(--warm-white);
+    border-top: 1px solid var(--sand);
+    border-bottom: 1px solid var(--sand);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .skill-pill {
+    background: var(--cream);
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--brown);
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .skill-pill:hover {
+    background: var(--terracotta-pale);
+    border-color: var(--terracotta-light);
+  }
+
+  .skill-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--terracotta-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .project-card {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(74, 55, 40, 0.12);
+  }
+
+  .project-img {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-img-1 { background: linear-gradient(135deg, #E8DFD0, #F0DDD3); }
+  .project-img-2 { background: linear-gradient(135deg, #E8EDE4, #D8E5D2); }
+  .project-img-3 { background: linear-gradient(135deg, #F5EDD8, #EAD5B0); }
+
+  .project-body { padding: 1.5rem; }
+
+  .project-tag {
+    display: inline-block;
+    background: var(--terracotta-pale);
+    color: var(--terracotta);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    margin-bottom: 0.8rem;
+  }
+
+  .project-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--brown);
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+
+  .project-body p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tech-chip {
+    background: var(--cream);
+    border: 1px solid var(--sand);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    color: var(--text-muted);
+  }
+
+  /* COURSEWORK */
+  .coursework-section { background: var(--cream); }
+
+  .courses-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .course-item {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 14px;
+    padding: 1.2rem 1.4rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: border-color 0.2s;
+  }
+
+  .course-item:hover { border-color: var(--terracotta-light); }
+
+  .course-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--terracotta-light);
+    line-height: 1;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .course-info h4 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--brown);
+    margin-bottom: 0.2rem;
+  }
+
+  .course-info p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--brown);
+    color: var(--cream);
+    text-align: center;
+    padding: 6rem 4rem;
+  }
+
+  .contact-section .section-label { color: var(--terracotta-light); }
+
+  .contact-section h2 { color: var(--cream); }
+
+  .contact-section p {
+    color: rgba(250, 247, 242, 0.65);
+    font-weight: 300;
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    font-size: 1.02rem;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.8rem;
+    background: rgba(250, 247, 242, 0.1);
+    border: 1px solid rgba(250, 247, 242, 0.2);
+    border-radius: 100px;
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .contact-link:hover {
+    background: rgba(250, 247, 242, 0.18);
+    transform: translateY(-2px);
+  }
+
+  /* FOOTER */
+  footer {
+    background: #2E1F14;
+    color: rgba(250, 247, 242, 0.4);
+    text-align: center;
+    padding: 1.5rem 4rem;
+    font-size: 0.82rem;
+    font-weight: 300;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 48px; height: 3px;
+    background: var(--terracotta);
+    border-radius: 100px;
+    margin-bottom: 1.2rem;
+  }
+
+  /* Animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .badge-1 { animation: float 4s ease-in-out infinite; }
+  .badge-2 { animation: float 5s ease-in-out infinite 0.5s; }
+  .badge-3 { animation: float 4.5s ease-in-out infinite 1s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+    .hero-visual { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .courses-list { grid-template-columns: 1fr; }
+    .contact-section { padding: 4rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Dameesha.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Electronics Engineer</div>
+    <h1>Hi, I'm<br /><em>Dameesha</em></h1>
+    <p class="hero-desc">
+      An undergraduate at Dawood University of Engineering & Technology, passionate about electronics, circuits, and the art of turning ideas into working systems — with a creative twist.
+    </p>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn-primary">See My Work</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="avatar-frame">
+      <div class="avatar-initials">D</div>
+    </div>
+
+    <div class="floating-badge badge-1">
+      <div class="badge-dot"></div>
+      DUET — Karachi
+    </div>
+    <div class="floating-badge badge-2">
+      ⚡ Electronics Eng.
+    </div>
+    <div class="floating-badge badge-3">
+      🎨 Art & Creativity
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-label">About Me</div>
+      <h2>Where circuits<br /><em>meet creativity</em></h2>
+      <div class="divider"></div>
+      <p>
+        I'm Dameesha, an electronics engineering student at Dawood University of Engineering & Technology in Karachi. I'm drawn to the elegance of signal processing, embedded systems, and the challenge of making hardware behave exactly as intended.
+      </p>
+      <p>
+        Outside the lab, I find that my love of art and creativity deeply informs the way I engineer — design thinking, visual problem-solving, and attention to detail come naturally when you see the world through both a technical and creative lens.
+      </p>
+      <p>
+        Currently in my undergraduate years, I'm building a foundation in core electronics while exploring how technology can be both functional and beautiful.
+      </p>
+    </div>
+
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="about-card-icon">🎓</div>
+        <h4>Education</h4>
+        <p>B.E. Electronics Engineering, DUET Karachi</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">📍</div>
+        <h4>Location</h4>
+        <p>Karachi, Pakistan</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">⚡</div>
+        <h4>Interests</h4>
+        <p>Embedded systems, signal processing, IoT</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🎨</div>
+        <h4>Hobbies</h4>
+        <p>Art, visual design, creative projects</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section">
+  <div class="section-label">What I Know</div>
+  <h2>Skills & Tools</h2>
+  <div class="skills-grid">
+    <div class="skill-pill"><div class="skill-icon">🔌</div> Circuit Design</div>
+    <div class="skill-pill"><div class="skill-icon">💻</div> C / C++</div>
+    <div class="skill-pill"><div class="skill-icon">🤖</div> Arduino</div>
+    <div class="skill-pill"><div class="skill-icon">🧩</div> MATLAB</div>
+    <div class="skill-pill"><div class="skill-icon">📐</div> Proteus / EDA</div>
+    <div class="skill-pill"><div class="skill-icon">📡</div> Signal Processing</div>
+    <div class="skill-pill"><div class="skill-icon">🛠</div> Embedded Systems</div>
+    <div class="skill-pill"><div class="skill-icon">🎨</div> Creative Thinking</div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">My Work</div>
+  <h2>Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-img project-img-1">🌡️</div>
+      <div class="project-body">
+        <span class="project-tag">Embedded Systems</span>
+        <h3>Smart Temperature Monitoring System</h3>
+        <p>Designed and built an Arduino-based temperature monitoring system with real-time alerts and LCD display, applying coursework in sensors and microcontrollers.</p>
+        <div class="project-tech">
+          <span class="tech-chip">Arduino</span>
+          <span class="tech-chip">C++</span>
+          <span class="tech-chip">DHT11 Sensor</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-img project-img-2">🔊</div>
+      <div class="project-body">
+        <span class="project-tag">Signal Processing</span>
+        <h3>Audio Signal Filtering Lab</h3>
+        <p>Implemented low-pass and high-pass filters in MATLAB to analyze and clean audio signals, visualizing frequency responses and Bode plots.</p>
+        <div class="project-tech">
+          <span class="tech-chip">MATLAB</span>
+          <span class="tech-chip">Signal Analysis</span>
+          <span class="tech-chip">Filters</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-img project-img-3">💡</div>
+      <div class="project-body">
+        <span class="project-tag">Circuit Design</span>
+        <h3>Automatic Street Light Circuit</h3>
+        <p>Designed a light-dependent resistor circuit that automatically switches street lights on at dusk and off at dawn, simulated in Proteus.</p>
+        <div class="project-tech">
+          <span class="tech-chip">Proteus</span>
+          <span class="tech-chip">LDR</span>
+          <span class="tech-chip">Op-Amp</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COURSEWORK -->
+<section class="coursework-section" id="courses">
+  <div class="section-label">Academics</div>
+  <h2>Coursework</h2>
+  <div class="courses-list">
+    <div class="course-item">
+      <div class="course-num">01</div>
+      <div class="course-info">
+        <h4>Circuit Theory & Analysis</h4>
+        <p>Fundamentals of DC/AC circuits, Kirchhoff's laws, Thevenin & Norton theorems</p>
+      </div>
+    </div>
+    <div class="course-item">
+      <div class="course-num">02</div>
+      <div class="course-info">
+        <h4>Digital Logic Design</h4>
+        <p>Boolean algebra, combinational & sequential circuits, FPGAs</p>
+      </div>
+    </div>
+    <div class="course-item">
+      <div class="course-num">03</div>
+      <div class="course-info">
+        <h4>Signals & Systems</h4>
+        <p>Fourier transforms, Laplace transforms, system analysis</p>
+      </div>
+    </div>
+    <div class="course-item">
+      <div class="course-num">04</div>
+      <div class="course-info">
+        <h4>Microprocessors & Microcontrollers</h4>
+        <p>Architecture, programming, interfacing with peripherals</p>
+      </div>
+    </div>
+    <div class="course-item">
+      <div class="course-num">05</div>
+      <div class="course-info">
+        <h4>Electronic Devices & Circuits</h4>
+        <p>Semiconductors, transistors, amplifiers, op-amps</p>
+      </div>
+    </div>
+    <div class="course-item">
+      <div class="course-num">06</div>
+      <div class="course-info">
+        <h4>Electromagnetic Theory</h4>
+        <p>Maxwell's equations, wave propagation, transmission lines</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-label">Let's Connect</div>
+  <h2>Say Hello 👋</h2>
+  <p>
+    Whether it's a project collaboration, coursework discussion, or just a friendly conversation about electronics or art — I'd love to hear from you.
+  </p>
+  <div class="contact-links">
+    <a href="mailto:dameesha@example.com" class="contact-link">✉️ Email Me</a>
+    <a href="https://linkedin.com" class="contact-link">LinkedIn</a>
+    <a href="https://github.com" class="contact-link">GitHub</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Dameesha · Electronics Engineering Student, DUET Karachi · Made with 🤎</p>
+</footer>
+
+</body>
+</html>
